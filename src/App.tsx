@@ -48,7 +48,7 @@ function App() {
     .reduce((acc, val) => (val > acc ? val : acc), 0);
 
   return (
-    <div className="flex flex-col items-center justify-center h-full gap-4 bg-stone-600">
+    <div className="flex flex-col items-center justify-center h-full gap-2 bg-stone-600">
       <SplitFlapBoard
         content={Array.from({ length: lines }).map((_, i) =>
           lyrics[(idx + i) % lyrics.length].padEnd(maxLength, " "),

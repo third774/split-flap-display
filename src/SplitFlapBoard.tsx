@@ -1,3 +1,4 @@
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { useId } from "react";
 import { SplitFlap } from "./SplitFlap";
 
@@ -14,11 +15,18 @@ export function SplitFlapBoard({ content }: SplitFlapBoardProps) {
     <>
       {content.map((str, rowIdx) => {
         return (
-          <div key={id + "-row-" + rowIdx} className="flex gap-1 font-mono">
-            {str.split("").map((char, i) => (
-              <SplitFlap key={id + "-flap-" + i} character={char} />
-            ))}
-          </div>
+          <>
+            <VisuallyHidden>{str}</VisuallyHidden>
+            <div
+              aria-hidden
+              key={id + "-row-" + rowIdx}
+              className="flex gap-1 font-mono"
+            >
+              {str.split("").map((char, i) => (
+                <SplitFlap key={id + "-flap-" + i} character={char} />
+              ))}
+            </div>
+          </>
         );
       })}
     </>

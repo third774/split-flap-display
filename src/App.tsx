@@ -30,25 +30,28 @@ const lyrics = [
   'and uncle in Bel-Air"',
 ];
 
+const lines = 4;
+
 function App() {
   const [idx, setIdx] = useState(0);
 
   useEffect(() => {
     const interval = window.setInterval(() => {
-      setIdx((i) => i + 1);
-    }, 6000);
+      setIdx((i) => i + lines);
+    }, 8000);
 
     return () => clearInterval(interval);
   }, []);
 
+  const maxLength = lyrics
+    .map((str) => str.length)
+    .reduce((acc, val) => (val > acc ? val : acc), 0);
+
   return (
     <div className="flex flex-col items-center justify-center h-full gap-4 bg-stone-600">
       <SplitFlapBoard
-        text={lyrics[idx % lyrics.length].padEnd(
-          lyrics
-            .map((str) => str.length)
-            .reduce((acc, len) => (len > acc ? len : acc), 0),
-          " ",
+        content={Array.from({ length: lines }).map((_, i) =>
+          lyrics[(idx + i) % lyrics.length].padEnd(maxLength, " "),
         )}
       />
     </div>
